@@ -122,8 +122,7 @@ var UIController = (function() {
                 current.value = "";
             });
 
-            console.log('fieldsArr', fieldsArr);
-
+            // console.log('fieldsArr', fieldsArr);
             fieldsArr[0].focus();
         },
 
@@ -152,21 +151,31 @@ var controller = (function(budgetCtrl, UICtrl) {
         });
     }
 
+    var updateBudget = function() {
+
+        // TODO Calculate budget
+
+        // TODO Return the budget
+
+        // TODO Display budget on UI
+
+    }
+
     var ctrlAddItem = function() {
         var input, newItem;
         
         input = UICtrl.getInput();
-        
-        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-        // console.log('newItem', newItem);
-        
-        UICtrl.addListItem(newItem, input.type);
-        
-        UICtrl.clearFields();
 
-        // 4. Calculate the budget
-
-        // 5. disaply budget on UI
+        if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
+            newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+            // console.log('newItem', newItem);
+            
+            UICtrl.addListItem(newItem, input.type);
+            
+            UICtrl.clearFields();
+    
+            updateBudget();
+        }
     }
 
     return {
