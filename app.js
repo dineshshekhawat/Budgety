@@ -96,7 +96,8 @@ var UIController = (function() {
         budgetLabel: '.budget__value',
         incomeLabel: '.budget__income--value',
         expensesLabel: '.budget__expenses--value',
-        percentageLabel: '.budget__expenses--percentage'
+        percentageLabel: '.budget__expenses--percentage',
+        container: '.container'
     }
 
     return {
@@ -115,7 +116,7 @@ var UIController = (function() {
                 element = DOMStrings.incomeContainer;
 
                 html = 
-                `<div class="item clearfix" id="income-%id%">
+                `<div class="item clearfix" id="inc-%id%">
                     <div class="item__description">%description%</div>
                     <div class="right clearfix">
                         <div class="item__value">%value%</div>
@@ -130,7 +131,7 @@ var UIController = (function() {
                 element = DOMStrings.expensesContainer;
 
                 html =
-                `<div class="item clearfix" id="expense-%id%">
+                `<div class="item clearfix" id="exp-%id%">
                     <div class="item__description">%description%</div>
                     <div class="right clearfix">
                         <div class="item__value">%value%</div>
@@ -199,6 +200,8 @@ var controller = (function(budgetCtrl, UICtrl) {
                 ctrlAddItem();
             }
         });
+
+        document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
     }
 
     var updateBudget = function() {
@@ -223,6 +226,23 @@ var controller = (function(budgetCtrl, UICtrl) {
             UICtrl.clearFields();
     
             updateBudget();
+        }
+    }
+
+    var ctrlDeleteItem = function(event) {
+        var itemID, splitID, type, ID;
+
+        itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+        if (itemID) {
+            splitID = itemID.split('-');
+            type = splitID[0];
+            ID = split[1];
+
+            // TODO Delete Item from Data Structure
+
+            // TODO Delete Item from UI
+
+            // TODO Update and Show the new budget
         }
     }
 
