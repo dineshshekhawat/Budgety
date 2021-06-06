@@ -165,6 +165,11 @@ var UIController = (function() {
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
         },
 
+        deleteListItem: function(selectorID) {
+            var el = document.getElementById(selectorID);
+            el.parentNode.removeChild(el);
+        },
+
         clearFields: function() {
             var fields, fieldsArr;
 
@@ -227,6 +232,14 @@ var controller = (function(budgetCtrl, UICtrl) {
         UICtrl.displayBudget(budget);
     }
 
+    var updatePercentages = function(){
+        // TODO Calculate the percentages
+
+        // TODO Read perentages from bughet controller
+
+        // TODO Update the UI with new percentages
+    }
+
     var ctrlAddItem = function() {
         var input, newItem;
         
@@ -241,6 +254,8 @@ var controller = (function(budgetCtrl, UICtrl) {
             UICtrl.clearFields();
     
             updateBudget();
+
+            updatePercentages();
         }
     }
 
@@ -255,9 +270,11 @@ var controller = (function(budgetCtrl, UICtrl) {
 
             budgetCtrl.deleteItem(type, ID);
 
-            // TODO Delete Item from UI
+            UICtrl.deleteListItem(itemID);
 
-            // TODO Update and Show the new budget
+            updateBudget();
+
+            updatePercentages();
         }
     }
 
